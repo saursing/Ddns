@@ -55,7 +55,7 @@ def add_dns(request):
             "additions": [record_set_data]
         }
     ).execute()
-    return "DNS record updated successfully"
+    return "DNS record added successfully"
 
 
 @app.route("/deleteIP/<request>")
