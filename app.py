@@ -33,7 +33,7 @@ def process_request(request, operation):
     ip_address = match_object.group(2)
     if not is_valid_ipv4(ip_address):
         return jsonify({"error": "Invalid IP address"}), 400
-     if not is_valid_url(URL):
+    if not is_valid_url(URL):
         return "Error: The URL {} is not in the correct format (example.com.)".format(URL)
     client = dns.Client(project=PROJECT_ID)
     credentials = GoogleCredentials.get_application_default()
