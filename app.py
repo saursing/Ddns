@@ -19,13 +19,22 @@ def is_valid_ipv4(ip_address):
     except ValueError:
         return False
 
+def is_valid_url(URL):
+    # Check if the URL is in the format "test.domain.com."
+    match_object = re.match("[a-zA-Z]+\.[a-zA-Z]+\.[a-zA-Z]+\.", URL)
+    if match_object:
+        return True
+    else:
+        return False
+
 def process_request(request, operation):
     match_object = re.match("URL=(.*)&IP=(.*)", request)
     URL = match_object.group(1)
     ip_address = match_object.group(2)
     if not is_valid_ipv4(ip_address):
         return jsonify({"error": "Invalid IP address"}), 400
-
+     if not is_valid_url(URL):
+        return "Error: The URL {} is not in the correct format (example.com.)".format(URL)
     client = dns.Client(project=PROJECT_ID)
     credentials = GoogleCredentials.get_application_default()
     service = discovery.build('dns', 'v1', credentials=credentials)
