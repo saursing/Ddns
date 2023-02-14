@@ -55,7 +55,7 @@ def process_request(request, operation):
                     "additions": [record_set_data]
                 }
             ).execute()
-        else:
+        elif operation == "delete":
             service.changes().create(
                 project=PROJECT_ID,
                 managedZone=MANAGED_ZONE,
@@ -63,6 +63,16 @@ def process_request(request, operation):
                     "deletions": [record_set_data]
                 }
             ).execute()
+        else:
+            # Return a 400 Bad Request error code with an error message
+            error_message = f"Invalid operation '{operation}' specified."
+            error_body = {
+                "error": {
+                    "code": 400,
+                    "message": error_message
+                }
+            }
+            return (json.dumps(error_body), 400, {'Content-Type': 'application/json'})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
     return jsonify({"message": "DNS record {} successfully".format(operation)}), 200
