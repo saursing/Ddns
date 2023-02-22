@@ -34,7 +34,7 @@ pip install -r requirements.txt
 
 4. Set the PROJECT_ID and MANAGED_ZONE variables in the app.py file to match your Google Cloud DNS project and managed zone.
 
-## Usage Standalone
+## Usage
 1. Start the Flask server:
 
 ```bash
@@ -45,7 +45,7 @@ python app.py
 
 3. To delete a DNS record, send a GET request to /deleteIP/URL=<URL>&IP=<IP_address>. Replace <URL> with the URL you want to delete, and <IP_address> with the corresponding IP address.
 
-## Usage with Docker
+## Docker Commands
 1. Build the Docker image:
 
 ```bash
